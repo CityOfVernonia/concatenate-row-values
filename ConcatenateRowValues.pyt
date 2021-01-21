@@ -82,13 +82,21 @@ class ConcatenateRowValues(object):
             parameterType="Optional",
             direction="Input")
 
+        outputTable = arcpy.Parameter(
+            displayName="Updated Table",
+            name="outTable",
+            datatype=["GPFeatureLayer", "DETable"],
+            parameterType="Derived",
+            direction="Output")
+
         caseField.parameterDependencies = [inputTable.name]
         fromField.parameterDependencies = [inputTable.name]
         toField.parameterDependencies = [inputTable.name]
         delimiter.value = ","
-
-        params = [inputTable, caseField, fromField, toField, delimiter]
-        return params
+        outputTable.parameterDependencies = [inputTable.name]
+        outputTable.schema.clone = True
+        
+        return [inputTable, caseField, fromField, toField, delimiter, outputTable]
 
     def isLicensed(self):
         return True
