@@ -50,7 +50,7 @@ class ConcatenateRowValues(object):
         inputTable = arcpy.Parameter(
             displayName="Input Table",
             name="inputTable",
-            datatype=["GPFeatureLayer", "DETable"],
+            datatype=["GPFeatureLayer", "DETable", "GPTableView"],
             parameterType="Required",
             direction="Input")
 
